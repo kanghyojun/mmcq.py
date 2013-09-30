@@ -1,7 +1,9 @@
 #! -*- coding: utf-8 -*-
+from collections import Iterator
+
 from .math_ import euclidean
 
-__all__ = 'CMap',
+__all__ = 'CMap', 'PQueue',
 
 class CMap(object):
 
@@ -11,7 +13,7 @@ class CMap(object):
 
     @property
     def palette(self):
-        return map(lambda vbox: vbox.color, self.vboxes)
+        return map(lambda d: d['color'], self.vboxes)
 
 
     def append(self, item):
@@ -45,6 +47,40 @@ class CMap(object):
 
         return self.nearest(color)
 
-   
-   def forcebw(self):
-       pass
+
+class PQueue(Iterator):
+
+    def __init__(self, sorted_key):
+        self.sorted_key = sorted_key
+        self.items = []
+        self.sorted_ = False
+
+
+    def next(self):
+        if not self.sorted_:
+            self.items = sorted(self.items, self.sorted_key)
+            self.sorted_ = True
+
+        if not self.items:
+            raise StopIteration
+
+        return self.pop()
+
+
+    def append(self, item):
+        items = self.items.append(item)
+        self.sorted_ = False
+
+
+    def pop(self):
+        if not self.sorted_:
+            self.items = sorted(self.items, self.sorted_key)
+            self.sorted_ = True
+
+        r = self.items[0]
+        self.items = self.items[1:]
+        return r
+
+
+    def __len__(self):
+        return len(self.items)

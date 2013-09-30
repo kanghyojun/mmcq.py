@@ -1,7 +1,6 @@
 #! -*- coding: utf-8 -*-
 from copy import deepcopy
 
-from . import get_color_index
 from .constant import SIGBITS
 
 __all__ = 'Vbox',
@@ -35,6 +34,7 @@ class Vbox(object):
 
     @property
     def average(self):
+        from .quantize import get_color_index
         if self._avg is not None:
             total = 0
             mult = 1 << (8 - SIGBITS)

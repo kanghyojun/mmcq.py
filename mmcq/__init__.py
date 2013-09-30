@@ -47,7 +47,6 @@ def get_palette(color_count=10, quality=10, **kwards):
         colors = []
         image.resize(200, 200)
         for x in xrange(0, image.height):
-            print x
             for y in xrange(0, image.width, quality):
                 color = image[x][y]
                 r = color.red_int8
@@ -56,7 +55,7 @@ def get_palette(color_count=10, quality=10, **kwards):
                 a = color.alpha_int8
                 if r < 250 and g < 250 and b < 250:
                     colors.append((r, g, b))
-
+        
         t.mark('scanning ended')
         print t
         c_map = mmcq(colors, color_count)

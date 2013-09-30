@@ -35,22 +35,24 @@ def vbox_from_colors(colors, histo):
         g_colors.append(r)
         b_colors.append(r)
 
-    return Vbox(min(r_colors),
+    vb = Vbox(min(r_colors),
                 max(r_colors),
                 min(g_colors),
                 max(g_colors),
                 min(b_colors),
                 max(b_colors),
                 histo)
+    print vb
+    return vb
 
 
 def median_cut(histo, vbox):
     if not vbox.count:
         return None
 
-    rw = vbox.r2 - vbox.r1 +1
-    gw = vbox.g2 - vbox.g1 +1
-    bw = vbox.b2 - vbox.b1 +1
+    rw = vbox.r2 - vbox.r1 + 1
+    gw = vbox.g2 - vbox.g1 + 1
+    bw = vbox.b2 - vbox.b1 + 1
     maxw = max([rw, gw, bw])
     if vbox.count == 1:
         return (vbox.copy, )
@@ -98,27 +100,33 @@ def median_cut(histo, vbox):
     dim2 = do_cut_color + '2'
     dim1_val = getattr(vbox, dim1)
     dim2_val = getattr(vbox, dim2)
+    print dim1
     for i in xrange(dim1_val, dim2_val+1):
         if partialsum[i] > (tot / 2):
+            print vbox
             vbox1 = vbox.copy
             vbox2 = vbox.copy
             left = i - dim1_val
             right = dim2_val - i
             if left <= right:
-                d2 = min([dim2_val - 1, ~~(i + right / 2)])
+                d2 = min([dim2_val - 1, ~~(i + (right / 2))])
             else:
-                d2 = max([dim1_val, ~~(i - 1 - left / 2)])
+                d2 = max([dim1_val, ~~(i - 1 - (left / 2))])
 
+            print 'd2, ', d2
             while not partialsum[d2]:
                 d2 += 1
 
             count2 = lookaheadsum[d2]
+            print 'ct2,',count2
             while not count2 and (d2 - 1) in partialsum:
                 d2 -= 1
                 count2 = lookaheadsum[d2]
 
             setattr(vbox1, dim2, d2)
             setattr(vbox2, dim1, getattr(vbox1, dim2) + 1)
+            print '1, ', vbox1
+            print '2, ', vbox2
             return (vbox1, vbox2)
 
 
@@ -140,9 +148,11 @@ def mmcq(colors, max_color):
     vbox = vbox_from_colors(colors, histo)
     pq.append(vbox)
     def iter_(lh, target):
+        print 'target! ', target
         n_color = 1
         n_iter = 0
         while n_iter < MAX_ITERATION:
+            print lh
             vbox = lh.pop()
             if not vbox.count:
                 lh.append(vbox)
@@ -155,6 +165,7 @@ def mmcq(colors, max_color):
 
             lh.append(vboxes[0])
             if len(vboxes) == 2:
+                print '2 boxes !'
                 lh.append(vboxes[1])
                 n_color += 1
 
@@ -166,6 +177,8 @@ def mmcq(colors, max_color):
 
             n_iter += 1
     
+    print '!max', max_color
+    print '!max', FRACT_BY_POPULATIONS
     iter_(pq, FRACT_BY_POPULATIONS * max_color)
     pq2 = PQueue(lambda x, y: (x.volume * x.count) >= (y.volume * y.count))
     for vbox in pq:

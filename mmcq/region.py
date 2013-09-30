@@ -106,3 +106,8 @@ class Vbox(object):
             self._count = n_pix
 
         return self._count
+    
+    def __repr__(self):
+        return 'Vbox(r=%d~%d, g=%d~%d, b=%d~%d)' % (self.r1, self.r2,
+                                                    self.g1, self.g2,
+                                                    self.b1, self.b2)

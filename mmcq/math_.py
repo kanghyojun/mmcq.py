@@ -4,4 +4,4 @@ from math import sqrt
 __all__ = 'euclidean',
 
 def euclidean(p1, p2):
-    return sqrt(sum(map(lambda x: pow(x[0] - x[1], 2), zip(p1, p2))))
+    return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2) + pow(p2[2] - p1[2], 2) )

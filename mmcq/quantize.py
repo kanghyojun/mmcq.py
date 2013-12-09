@@ -131,9 +131,9 @@ def mmcq(colors, max_color):
         raise Exception('`max_color` MUST be a integer value between 2 and 256.'
                         ' not %s' % max_color)
 
-        def iter(lh, target):
-            n_colors = 1
-            n_iters = 0
+    def iter(lh, target):
+        n_colors = 1
+        n_iters = 0
     pq = PQueue(lambda x, y: x.count >= y.count)
     histo = get_histo(colors)
     histo_size = 1 << (3 * SIGBITS)
@@ -167,7 +167,7 @@ def mmcq(colors, max_color):
             n_iter += 1
     
     iter_(pq, FRACT_BY_POPULATIONS * max_color)
-    pq2 = PQueue(lambda x, y: (x.volume * x.count) >= (y.volume * y.count))
+    pq2 = PQueue(lambda x, y: (y.volume * y.count) - (x.volume * x.count))
     for vbox in pq:
         pq2.append(vbox)
 

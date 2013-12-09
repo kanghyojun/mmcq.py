@@ -82,8 +82,8 @@ class Vbox(object):
             r_v >= self.r1,
             r_v <= self.r2,
             g_v >= self.g1,
-            g_v >= self.g1,
-            b_v <= self.b2,
+            g_v <= self.g2,
+            b_v >= self.b1,
             b_v <= self.b2,
         ])
 

@@ -8,5 +8,5 @@ setup(name='mmcq.py',
       author='Kang Hyojun',
       author_email='hyojun@admire.kr',
       install_requires=[
-          'Wand == 0.3.5'
+          'Wand >= 0.3.0'
       ])

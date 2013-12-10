@@ -17,6 +17,8 @@ Usage
 
 To get sample palette, you can use `mmcq.get_palette`.
 
+.. code-block:: python
+
     >>> from mmcq import get_palette
     >>> get_palette(filename='/image/something.jpg', 3)
     [(255, 234, 0), (234, 245, 22), (42, 42, 42)]
@@ -28,9 +30,13 @@ To get sample palette, you can use `mmcq.get_palette`.
 To get dominant color, you can use `mmcq.get_dominant_color`
 which color is frist of `mmcq.get_palette`.
 
+.. code-block:: python
+
    >>> from mmcq import get_dominant_color
    >>> get_dominant_color(filename='/image/something.jpg')
    (255, 234, 0)
 
 
-See more at [Color thief](http://lokeshdhakar.com/color-thief/).
+See more at `Color thief`_.
+
+.. _Color thief: http://lokeshdhakar.com/color-thief/

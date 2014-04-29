@@ -20,7 +20,8 @@ To get sample palette, you can use `mmcq.get_palette`.
 .. code-block:: python
 
     >>> from mmcq import get_palette
-    >>> get_palette(filename='/image/something.jpg', 3)
+    >>> with get_palette(filename='/image/something.jpg', 3) as palette:
+    ...     print palette
     [(255, 234, 0), (234, 245, 22), (42, 42, 42)]
     >>> from wand import Image
     >>> with Image(filename='/image/something.jpg') as image:

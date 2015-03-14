@@ -49,9 +49,9 @@ class Vbox(object):
             r_sum = 0
             g_sum = 0
             b_sum = 0
-            for i in xrange(self.r1, self.r2 + 1):
-                for j in xrange(self.g1, self.g2 + 1):
-                    for k in xrange(self.b1, self.b2 + 1):
+            for i in range(self.r1, self.r2 + 1):
+                for j in range(self.g1, self.g2 + 1):
+                    for k in range(self.b1, self.b2 + 1):
                         index = get_color_index(i, j, k)
                         hval = self.histo[index]
                         total += hval
@@ -94,9 +94,9 @@ class Vbox(object):
         if not self._count:
             n_pix = 0
             his_len = len(self.histo)
-            for i in xrange(self.r1, self.r2):
-                for j in xrange(self.g1, self.g2):
-                    for k in xrange(self.b1, self.b2):
+            for i in range(self.r1, self.r2):
+                for j in range(self.g1, self.g2):
+                    for k in range(self.b1, self.b2):
                         index_ = get_color_index(i, j, k)
                         try:
                             n_pix += self.histo[index_]

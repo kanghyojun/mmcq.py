@@ -12,7 +12,7 @@ def get_color_index(r, g, b):
 
 def get_histo(colors):
     histo_size = 1 << (3 * SIGBITS)
-    histo = list([0 for x in xrange(int(histo_size))])
+    histo = list([0 for x in range(int(histo_size))])
     for color in colors:
         r = color[0] >> RSHIFT
         g = color[1] >> RSHIFT
@@ -62,9 +62,9 @@ def median_cut(histo, vbox):
     do_cut_color = None
     if maxw == rw:
         do_cut_color = 'r'
-        for i in xrange(vbox.r1, vbox.r2+1):
-            for j in xrange(vbox.g1, vbox.g2+1):
-                for k in xrange(vbox.b1, vbox.b2+1):
+        for i in range(vbox.r1, vbox.r2+1):
+            for j in range(vbox.g1, vbox.g2+1):
+                for k in range(vbox.b1, vbox.b2+1):
                     index = get_color_index(i, j, k)
                     sum_ += histo[index]
 
@@ -72,9 +72,9 @@ def median_cut(histo, vbox):
             partialsum[i] = tot
     elif maxw == gw:
         do_cut_color = 'g'
-        for i in xrange(vbox.g1, vbox.g2+1):
-            for j in xrange(vbox.r1, vbox.r2+1):
-                for k in xrange(vbox.b1, vbox.b2+1):
+        for i in range(vbox.g1, vbox.g2+1):
+            for j in range(vbox.r1, vbox.r2+1):
+                for k in range(vbox.b1, vbox.b2+1):
                     index = get_color_index(j, i, k)
                     sum_ += histo[index]
 
@@ -82,9 +82,9 @@ def median_cut(histo, vbox):
             partialsum[i] = tot
     elif maxw == bw:
         do_cut_color = 'b'
-        for i in xrange(vbox.b1, vbox.b2+1):
-            for j in xrange(vbox.r1, vbox.r2+1):
-                for k in xrange(vbox.g1, vbox.g2+1):
+        for i in range(vbox.b1, vbox.b2+1):
+            for j in range(vbox.r1, vbox.r2+1):
+                for k in range(vbox.g1, vbox.g2+1):
                     index = get_color_index(j, k, i)
                     sum_ += histo[index]
 
@@ -98,7 +98,7 @@ def median_cut(histo, vbox):
     dim2 = do_cut_color + '2'
     dim1_val = getattr(vbox, dim1)
     dim2_val = getattr(vbox, dim2)
-    for i in xrange(dim1_val, dim2_val+1):
+    for i in range(dim1_val, dim2_val+1):
         if partialsum[i] > (tot / 2):
             vbox1 = vbox.copy
             vbox2 = vbox.copy

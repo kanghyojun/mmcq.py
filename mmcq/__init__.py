@@ -18,8 +18,8 @@ def get_palette(color_count=10, quality=10, **kwards):
     with Image(**kwards) as image:
         colors = []
         image.resize(200, 200)
-        for x in xrange(0, image.height):
-            for y in xrange(0, image.width, quality):
+        for x in range(0, image.height):
+            for y in range(0, image.width, quality):
                 color = image[x][y]
                 r = color.red_int8
                 g = color.green_int8

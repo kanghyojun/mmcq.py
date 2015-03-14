@@ -3,6 +3,7 @@ from .constant import SIGBITS, RSHIFT, MAX_ITERATION, FRACT_BY_POPULATIONS
 from .region import Vbox
 from .struct import CMap, PQueue
 
+
 __all__ = 'mmcq', 'get_histo', 'get_color_index',
 
 
@@ -125,15 +126,16 @@ def median_cut(histo, vbox):
 def mmcq(colors, max_color):
     if not isinstance(colors, list) or not colors:
         raise Exception('`colors` MUST be list '
-                        'that contains items not %s' % colors)
-        
+                        'that contains items not %s'.format(colors))
+
     if max_color < 2 or max_color > 256:
-        raise Exception('`max_color` MUST be a integer value between 2 and 256.'
-                        ' not %s' % max_color)
+        raise Exception('`max_color` MUST be a integer value between '
+                        '2 and 256. not %s'.format(max_color))
 
     def iter(lh, target):
         n_colors = 1
         n_iters = 0
+
     pq = PQueue(lambda x, y: x.count >= y.count)
     histo = get_histo(colors)
     histo_size = 1 << (3 * SIGBITS)
@@ -148,24 +150,19 @@ def mmcq(colors, max_color):
                 lh.append(vbox)
                 n_iter += 1
                 continue
-            
             vboxes = median_cut(histo, vbox)
             if not vboxes:
                 return None
-
             lh.append(vboxes[0])
             if len(vboxes) == 2:
                 lh.append(vboxes[1])
                 n_color += 1
-
             if n_color >= target:
                 return None
-
             if n_iter > MAX_ITERATION:
                 return None
-
             n_iter += 1
-    
+
     iter_(pq, FRACT_BY_POPULATIONS * max_color)
     pq2 = PQueue(lambda x, y: (y.volume * y.count) - (x.volume * x.count))
     for vbox in pq:

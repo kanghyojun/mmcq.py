@@ -3,7 +3,9 @@ from copy import deepcopy
 
 from .constant import SIGBITS
 
+
 __all__ = 'Vbox',
+
 
 class Vbox(object):
 
@@ -19,7 +21,6 @@ class Vbox(object):
         self._volumn = None
         self._count = None
 
-
     @property
     def volume(self):
         if self._volumn is None:
@@ -30,7 +31,6 @@ class Vbox(object):
 
         return self._volumn
 
-
     @property
     def copy(self):
         copied = deepcopy(self)
@@ -38,7 +38,6 @@ class Vbox(object):
         copied._volumn = None
         copied._count = None
         return copied
-
 
     @property
     def average(self):
@@ -58,7 +57,7 @@ class Vbox(object):
                         r_sum += hval * (i + 0.5) * mult
                         g_sum += hval * (j + 0.5) * mult
                         b_sum += hval * (k + 0.5) * mult
-           
+
             if total:
                 r_avg = ~~int(r_sum / total)
                 g_avg = ~~int(g_sum / total)
@@ -71,7 +70,6 @@ class Vbox(object):
             self._avg = r_avg, g_avg, b_avg
 
         return self._avg
-
 
     def contains(self, pixel):
         r_v = pixel[0] >> RSHIFT
@@ -86,7 +84,6 @@ class Vbox(object):
             b_v >= self.b1,
             b_v <= self.b2,
         ])
-
 
     @property
     def count(self):

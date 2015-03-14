@@ -7,6 +7,7 @@ setup(name='mmcq.py',
       version=VERSION,
       author='Kang Hyojun',
       author_email='hyojun@admire.kr',
+      packages=['mmcq'],
       install_requires=[
           'Wand >= 0.3.0'
       ])

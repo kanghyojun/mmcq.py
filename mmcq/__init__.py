@@ -4,6 +4,11 @@ from contextlib import contextmanager
 from .constant import SIGBITS
 from .quantize import mmcq
 
+
+__version__ = (0, 0, 1)
+version = '{}.{}.{}'.format(*__version__)
+
+
 @contextmanager
 def get_palette(color_count=10, quality=10, **kwards):
     from wand.image import Image, Color

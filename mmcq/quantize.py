@@ -49,9 +49,9 @@ def median_cut(histo, vbox):
     if not vbox.count:
         return None
 
-    rw = vbox.r2 - vbox.r1 +1
-    gw = vbox.g2 - vbox.g1 +1
-    bw = vbox.b2 - vbox.b1 +1
+    rw = vbox.r2 - vbox.r1 + 1
+    gw = vbox.g2 - vbox.g1 + 1
+    bw = vbox.b2 - vbox.b1 + 1
     maxw = max([rw, gw, bw])
     if vbox.count == 1:
         return (vbox.copy, )
@@ -141,6 +141,7 @@ def mmcq(colors, max_color):
     histo_size = 1 << (3 * SIGBITS)
     vbox = vbox_from_colors(colors, histo)
     pq.append(vbox)
+
     def iter_(lh, target):
         n_color = 1
         n_iter = 0

@@ -17,7 +17,7 @@ class Vbox(object):
         self.b1 = b1
         self.b2 = b2
         self.histo = histo
-        self._avg =  None
+        self._avg = None
         self._volumn = None
         self._count = None
 
